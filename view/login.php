@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row min-vh-100 align-items-center" id="login">
         <div class="col text-center">
-            <form action="?controller=Login&method=logar" method="post" onsubmit="return valida_login()">
+            <form action="?controller=Login&method=logar" method="post" onsubmit="return validaLogin()">
                 <a href="index.php"><img src="assets/img/bruno_marques_nogueira_avatar.jpg" class="img-fluid" alt="Bruno Marques Nogueira - Programmer – Analyst - Manager" title="Bruno Marques Nogueira - Programmer – Analyst - Manager" /></a>
                 <br />
                 <div class="row" id="mensagem">
@@ -16,7 +16,7 @@
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="email">E-Mail</label>
                             </div>
-                            <input type="text" name="email" value="" placeholder="E-MAIL" class="form-control" id="usuario" aria-label="E-mail" aria-describedby="inputGroup-sizing-default" />
+                            <input type="text" name="email" value="" placeholder="E-MAIL" class="form-control" id="email" aria-label="E-mail" aria-describedby="inputGroup-sizing-default" />
                         </div>
                     </div>
                 </div>
@@ -67,6 +67,6 @@
 </div>
 <?php
 if(!empty($html_pagina['library']['message'])) {
-    echo '<script type="text/javascript">$(function(){exibir_alerta_login("' . str_replace('-', ' ', $html_pagina['library']['message']) . '");});</script>';
+    echo '<script type="text/javascript">$(function(){exibirAlertaLogin("' . str_replace('-', ' ', $html_pagina['library']['message']) . '");});</script>';
 }
 ?>

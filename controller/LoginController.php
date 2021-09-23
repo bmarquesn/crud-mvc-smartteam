@@ -6,7 +6,7 @@ class LoginController extends Controller {
     private $UsuarioModel;
 
     public function __construct() {
-        if(isset($_POST['usuario']) && !empty($_POST['usuario'])) {
+        if(isset($_POST['email']) && !empty($_POST['email'])) {
             $this->request = $_POST;
         }
 
@@ -26,18 +26,19 @@ class LoginController extends Controller {
 
     public function logar() {
         /** fazer toda a validação de login */
-        if($this->__get('usuario') && $this->__get('senha')) {
-            $usuario = $this->UsuarioModel->escapar($this->__get('usuario'));
+        if($this->__get('email') && $this->__get('senha')) {
+            $email = $this->UsuarioModel->escapar($this->__get('email'));
             $senha = $this->UsuarioModel->escapar(md5($this->__get('senha') . $this->hash_senha));
-            var_dump($usuario, $senha);die;
+
             /** 'all_filter' = nome do campo na tabela e o valor que deseja buscar */
-            $dados_usuario = $this->UsuarioModel->all_filter([['usuario', $usuario], ['senha', $senha]]);
+            $dados_usuario = $this->UsuarioModel->all_filter([['email', $email], ['senha', $senha]]);
 
             if($dados_usuario !== false) {
                 /** cria-se a sessão do usuário com o ID deste */
                 session_start();
                 $_SESSION['id_user'] = base64_encode($dados_usuario[0]['id'] . $this->hash_senha);
                 unset($dados_usuario);
+                var_dump('Logado!!!', $_SESSION['id_user']);die;
 
                 header("Location:?controller=usuario");
             } else {

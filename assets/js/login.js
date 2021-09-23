@@ -7,7 +7,7 @@ function validaLogin(){
 	var codigo_gerado=$('div#login').find('div#codigo_gerado').text().trim();
 
 	if(email.val().trim()=="") {
-		exibirAlertaLogin('É necessário digitar o USUÁRIO');
+		exibirAlertaLogin('É necessário digitar o E-MAIL');
 		email.focus();
 		valido=false;
 	} else if(senha.val().trim()=="") {
