@@ -36,7 +36,7 @@ class MainModel extends Conexao {
 
         if($stmt = $mysqli->prepare($str_sql)) {
             $result = array();
-        
+
             if($stmt->execute()) {
                 $obj_result = $stmt->get_result();
 
@@ -44,7 +44,7 @@ class MainModel extends Conexao {
                     $result[] = $rs;
                 }
             }
-            
+
             if(count($result) > 0) {
                 return $result;
             }
@@ -55,7 +55,7 @@ class MainModel extends Conexao {
 
     public function all_filter($array_filtro = array(), $and_or = "AND", $like_equal = "=", $ativo = 1) {
         $conexao_bd = Conexao::getInstance();
-        
+
         $str_sql = "SELECT * FROM " . $this->table . " WHERE (";
 
         foreach($array_filtro as $key => $value) {
@@ -78,21 +78,21 @@ class MainModel extends Conexao {
 
         if($stmt = $conexao_bd->prepare($str_sql)) {
             $result = array();
-            
+
             if($stmt->execute()) {
                 if(TIPOBD === "MYSQL") {
                     $obj_result = $stmt->get_result();
                 } elseif(TIPOBD === "PDO") {
 
                 }
-                
+
                 if(!empty($obj_result)) {
                     while ($rs = $obj_result->fetch_assoc()) {
                         $result[] = $rs;
                     }
                 }
             }
-            
+
             if(count($result) > 0) {
                 return $result;
             }
@@ -115,7 +115,7 @@ class MainModel extends Conexao {
 
             $query = "UPDATE " . $this->table . " SET ".implode(', ', $definir)." WHERE ".explode("-", $this->id)[0]."=". $this->escapar(explode("-", $this->id)[1]) . ";";
         }
-        
+
         if($conexao = Conexao::getInstance()) {
             if($debug === 0) {
                 $stmt = $conexao->prepare($query);
@@ -124,13 +124,15 @@ class MainModel extends Conexao {
                 var_dump($query);
                 die;
             }
-            
+
             if($stmt->execute()) {
                 if(!isset($this->id) || empty($this->id)) {
                     return $stmt->insert_id;
                 } else {
                     return (int)explode("-", $this->id)[1];
                 }
+            } else {
+                return "Error: " . $stmt->error;
             }
         }
 
@@ -159,7 +161,7 @@ class MainModel extends Conexao {
                 $resultado[$k] = $this->escapar($v);
             }
         }
-        
+
         return $resultado;
     }
 
@@ -199,9 +201,9 @@ class MainModel extends Conexao {
 
         if($conexao = Conexao::getInstance()) {
             $stmt = $conexao->prepare($query);
-            
+
             $stmt->execute();
-            
+
             return true;
         }
 

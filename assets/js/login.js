@@ -1,5 +1,5 @@
 function validaLogin(){
-	var valido=false;
+	var valido = false;
 
 	var email = $('#login').find('form').find('input[name="email"]');
 	var senha = $('#login').find('form').find('input[name="senha"]');
@@ -10,12 +10,12 @@ function validaLogin(){
 		exibirAlertaLogin('É necessário digitar o E-MAIL');
 		email.focus();
 		valido=false;
-	} else if(senha.val().trim()=="") {
-		exibirAlertaLogin('É necessário digitar a SENHA');
-		senha.focus();
-		valido=false;
 	} else if(!validEmail(email)) {
 		exibirAlertaLogin('É necessário digitar um E-MAIL VÁLIDO');
+		email.focus();
+		valido=false;
+	} else if(senha.val().trim()=="") {
+		exibirAlertaLogin('É necessário digitar a SENHA');
 		senha.focus();
 		valido=false;
 	} else if(codigo.val().trim()=="") {
@@ -39,18 +39,4 @@ function exibirAlertaLogin(mensagem){
 	$('#login').find('#mensagem').hide('fast');
 	$('#login').find('#mensagem').find('.alert-danger').html(mensagem);
 	$('#login').find('#mensagem').show('fast');
-}
-
-//Function that checks if valid email
-function validEmail(field){
-	var value_field = $(field).val().trim();
-	var retorno;
-
-	if ((/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value_field)) || (!value_field)) {
-        retorno=true;
-    } else {
-        retorno=false;
-	}
-
-	return retorno;
 }

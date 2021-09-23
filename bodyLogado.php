@@ -1,14 +1,14 @@
 <div class="line_top interno">
-    <?php require_once('view/menu/menu_duplo_topo.php'); ?>
+    <?php require_once('view/menu/menuDuploTopo.php'); ?>
 </div>
 <div class="container-fluid">
-    <?php require_once('view/menu/topo_menu_interno.php'); ?>
+    <?php require_once('view/menu/topoMenuInterno.php'); ?>
 </div>
 <div class="container-fluid">
     <div class="conteudo_interno">
-    <?php
-    require_once('view/menu/menu_busca.php');
-    include($html_pagina['page_include']);
-    ?>
+        <?php
+        require_once('view/menu/menuBusca.php');
+        include($html_pagina['page_include']);
+        ?>
     </div>
 </div>

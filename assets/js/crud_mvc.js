@@ -4,6 +4,7 @@ $(function(){
 			event.preventDefault();
 		}
 	});
+
 	$('#topo_menu_interno').find('a').on('click', function(){
 		if($(this).text()==="LOGOUT"){
 			var confirmar=confirm('Deseja mesmo fechar o sistema?');
@@ -12,17 +13,19 @@ $(function(){
 			}
 		}
 	});
+
 	/** cep */
 	$('input#cep').mask('00000-000');
+
 	/** busca cep */
-	function limpa_formulário_cep() {
+	function limpaFormulárioCEP() {
 		// Limpa valores do formulário de cep.
 		$("#logradouro").val("");
 		$("#bairro").val("");
 		$("#cidade").val("");
 		$("#uf").val("");
 	}
-	
+
 	$("#cep").blur(function() {
 		//Nova variável "cep" somente com dígitos.
 		var cep=$(this).val().replace(/\D/g, '');
@@ -46,19 +49,20 @@ $(function(){
 						$("#cidade").val(dados.localidade);
 						$("#uf").val(dados.uf);
 					}else{
-						limpa_formulário_cep();
-						exibir_alerta_campo("#modal_valida_usuario", $("#cep"), "CEP NÃO ENCONTRADO");
+						limpaFormulárioCEP();
+						exibirAlertaCampo("#modal_valida_usuario", $("#cep"), "CEP NÃO ENCONTRADO");
 					}
 				});
 			}else{
-				limpa_formulário_cep();
-				exibir_alerta_campo("#modal_valida_usuario", $("#cep"), "FORMATO DE CEP INVÁLIDO");
+				limpaFormulárioCEP();
+				exibirAlertaCampo("#modal_valida_usuario", $("#cep"), "FORMATO DE CEP INVÁLIDO");
 			}
 		}else{
-			limpa_formulário_cep();
-			exibir_alerta_campo("#modal_valida_usuario", $("#cep"), "O campo CEP não foi preenchido");
+			limpaFormulárioCEP();
+			exibirAlertaCampo("#modal_valida_usuario", $("#cep"), "O campo CEP não foi preenchido");
 		}
 	});
+
 	/** reset formulario */
 	$('input[type="reset"]').on('click', function(){
 		$('input[type="text"]').val('');
@@ -68,21 +72,28 @@ $(function(){
 		$('textarea').val('');
 	});
 });
-function exibir_alerta_campo(nome_modal, campo, mensagem){
-	$(nome_modal).find('.modal-body').children('p').html(mensagem);
+
+function exibirAlertaCampo(nome_modal, campo, mensagem){
+	$(nome_modal).find('.modal-body').find('p').html(mensagem);
 	$(nome_modal).modal('show');
+
 	$(nome_modal).on('hidden.bs.modal', function(){
 		if(campo!=""){
 			campo.focus();
 		}
 	});
 }
+
 //Function that checks if valid email
-function validaEmail(campo){
-	var valor_campo=campo;
-	var valido=false;
-    if((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(valor_campo))||(!valor_campo)){
-		valido=true;
+function validEmail(field){
+	var value_field = field.val().trim();
+	var retorno;
+
+	if ((/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value_field)) || (!value_field)) {
+        retorno=true;
+    } else {
+        retorno=false;
 	}
-	return valido;
+
+	return retorno;
 }
