@@ -38,6 +38,7 @@ class LoginController extends Controller {
                 session_start();
                 $_SESSION['id_user'] = base64_encode($dados_usuario[0]['id'] . $this->hash_senha);
                 unset($dados_usuario);
+
                 var_dump('Logado!!!', $_SESSION['id_user']);die;
 
                 header("Location:?controller=usuario");
