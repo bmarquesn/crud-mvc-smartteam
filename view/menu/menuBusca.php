@@ -25,6 +25,35 @@ switch(strtoupper($pagina_Atual)) {
             $html_titulo_search = "<h2>" . strtoupper($funcao_Atual) . " Usuário</h2>";
         }
         break;
+    case 'DIVIDA':
+        $html_titulo_search = "<h2>Dívidas</h2>";
+        if(strtoupper($funcao_Atual) != "INSERIR" && stripos($funcao_Atual, 'editar') === false) {
+            $html_titulo_search = $html_titulo_search . '
+            <div class="row" id="menu_busca">
+                <div class="col align-items-center">
+                    <input type="text" value="" class="buscar form-control" placeholder="TÍTULO" />
+                </div>
+                <div class="col align-items-center">
+                    <input type="text" value="" class="buscar form-control" placeholder="USUÁRIO" />
+                </div>
+                <div class="col align-items-center">
+                    <input type="text" value="" class="buscar form-control" placeholder="VALOR" />
+                </div>
+                <div class="col align-items-center">
+                    <input type="text" value="" class="buscar form-control" placeholder="DATA VENCIMENTO" />
+                </div>
+                <div class="col-1 align-items-center nopadding">
+                    <button type="button" class="buscar_divida"><img src="assets/img/lupa_1.png" alt="Buscar" title="Buscar" class="img-fluid" /></button>
+                </div>
+                <div class="col-1 align-items-center nopadding">
+                    <button type="button" class="inserir_divida"><img src="assets/img/bt_adicionar.png" alt="Adicionar" title="Adicionar" class="img-fluid" /></button>
+                </div>
+            </div><br />
+            ';
+        } else {
+            $html_titulo_search = "<h2>" . strtoupper($funcao_Atual) . " Dívida</h2>";
+        }
+        break;
     default:
         $html_titulo_search = "<br />";
 }

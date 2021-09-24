@@ -84,12 +84,21 @@
         <div class="col-4">
             <a href="?controller=usuario"><input type="button" value="VOLTAR" class="form-control voltar btn btn-warning" /></a>
         </div>
+        <?php if(isset($dados_usuario) && !empty($dados_usuario) && $dados_usuario['usuario_id'] > 1) { ?>
         <div class="col-4">
             <input type="reset" value="LIMPAR" class="form-control btn btn-danger" />
         </div>
         <div class="col-4">
             <input type="button" value="SALVAR" class="form-control btn btn-primary" />
         </div>
+        <?php } elseif(!isset($dados_usuario)) { ?>
+        <div class="col-4">
+            <input type="reset" value="LIMPAR" class="form-control btn btn-danger" />
+        </div>
+        <div class="col-4">
+            <input type="button" value="SALVAR" class="form-control btn btn-primary" />
+        </div>
+        <?php } ?>
     </div>
     <br />
 </div>

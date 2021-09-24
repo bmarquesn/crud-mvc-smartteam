@@ -29,10 +29,18 @@ class MainModel extends Conexao {
         return $this->table;
     }
 
-    public function all($ativo = 1) {
+    public function all($ativo = 1, $order_by = null) {
         $mysqli = Conexao::getInstance();
 
         $str_sql = "SELECT * FROM " . $this->table . " WHERE ativo = ". $ativo;
+
+        if(!is_null($order_by)) {
+            if(is_array($order_by)) {
+                $str_sql .= " ORDER BY " . $order_by[0] . " " . $order_by[1];
+            } else {
+                $str_sql .= " ORDER BY " . $order_by;
+            }
+        }
 
         if($stmt = $mysqli->prepare($str_sql)) {
             $result = array();
@@ -53,7 +61,7 @@ class MainModel extends Conexao {
         return false;
     }
 
-    public function all_filter($array_filtro = array(), $and_or = "AND", $like_equal = "=", $ativo = 1) {
+    public function all_filter($array_filtro = array(), $and_or = "AND", $like_equal = "=", $ativo = 1, $order_by = null) {
         $conexao_bd = Conexao::getInstance();
 
         $str_sql = "SELECT * FROM " . $this->table . " WHERE (";
@@ -75,6 +83,14 @@ class MainModel extends Conexao {
         }
 
         $str_sql .= ") AND ativo = " . $ativo;
+
+        if(!is_null($order_by)) {
+            if(is_array($order_by)) {
+                $str_sql .= " ORDER BY " . $order_by[0] . " " . $order_by[1];
+            } else {
+                $str_sql .= " ORDER BY " . $order_by;
+            }
+        }
 
         if($stmt = $conexao_bd->prepare($str_sql)) {
             $result = array();
@@ -220,6 +236,8 @@ class MainModel extends Conexao {
 
                 if($stmt->execute()) {
                     $obj_result = $stmt->get_result();
+
+                    $result = null;
 
                     while ($rs = $obj_result->fetch_assoc()) {
                         $result[] = $rs;

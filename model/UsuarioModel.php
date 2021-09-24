@@ -10,7 +10,7 @@ class UsuarioModel extends MainModel {
     }
 
     public function trazer_dados_usuario($id_usuario, $degug = 0) {
-        $str_sql = "SELECT " . $this->nome_tabela . ".*, enderecos.* FROM " . $this->nome_tabela;
+        $str_sql = "SELECT " . $this->nome_tabela . ".*, " . $this->tabela_enderecos . ".* FROM " . $this->nome_tabela;
         $str_sql .= " LEFT JOIN " . $this->tabela_enderecos . " ON " . $this->tabela_enderecos . ".usuario_id = " . $this->nome_tabela . ".id";
         $str_sql .= " WHERE " . $this->nome_tabela . ".id = " . (int)$id_usuario;
 

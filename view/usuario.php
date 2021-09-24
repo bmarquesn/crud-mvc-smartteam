@@ -1,5 +1,4 @@
 <div class="usuario">
-    <!-- p><a href="?controller=usuario&method=inserir" class="btn-sm btn-primary">INSERIR</a></p -->
     <table class="table table-bordered table-striped table-sm">
         <thead class="thead-dark">
             <tr>
@@ -10,19 +9,23 @@
         </thead>
         <tbody>
             <?php
-        if(!isset($html_pagina['library']['registros']) || empty($html_pagina['library']['registros'])) {
-            echo '<tr><td colspan="4"><em>Não há Usuários cadastrados</em></td></tr>';
-        } else {
-            foreach($html_pagina['library']['registros'] as $key => $value) {
-                echo '<tr>';
-                    echo '<td><input type="hidden" value="' . $value['id'] . '" />' . $value['nome'] . '</td>';
-                    echo '<td>' . $value['email'] . '</td>';
-                    echo '<td class="text-center"><button type="button" class="btn btn-primary usuario_editar" title="Visualizar/Editar Usuário">V / E</button></td>';
-                    echo '<td class="text-center"><button type="button" class="btn btn-danger usuario_excluir" title="Excluir Usuário">X</button></td>';
-                echo '</tr>';
+            if(!isset($html_pagina['library']['registros']) || empty($html_pagina['library']['registros'])) {
+                echo '<tr><td colspan="4"><em>Não há Usuários cadastrados</em></td></tr>';
+            } else {
+                foreach($html_pagina['library']['registros'] as $key => $value) {
+                    echo '<tr>';
+                        echo '<td><input type="hidden" value="' . $value['id'] . '" />' . $value['nome'] . '</td>';
+                        echo '<td>' . $value['email'] . '</td>';
+                        if($value['id'] != 1) {
+                            echo '<td class="text-center"><button type="button" class="btn btn-primary usuario_editar" title="Visualizar/Editar Usuário">V / E</button></td>';
+                            echo '<td class="text-center"><button type="button" class="btn btn-danger usuario_excluir" title="Excluir Usuário">X</button></td>';
+                        } else {
+                            echo '<td colspan="2">&nbsp;</td>';
+                        }
+                    echo '</tr>';
+                }
             }
-        }
-        ?>
+            ?>
         </tbody>
     </table>
 </div>

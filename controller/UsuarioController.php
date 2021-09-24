@@ -60,6 +60,7 @@ class UsuarioController extends Controller {
                     $this->EnderecoModel->__set('usuario_id', (int)$value);
                 }
 
+                /** usa-se esta parte para usar na atualização */
                 if($key == 'usuario_id' && !empty($value)) {
                     $novo_usuario = false;
                     $this->UsuarioModel->__set('id', 'id-'.(int)$value);

@@ -24,19 +24,19 @@ function AutoLoadPages($className) {
     $diretorio_controller = "controller";
     spl_autoload_extensions("Controller.php");
     $extension =  spl_autoload_extensions();
-    
+
     if(file_exists(__DIR__ . DIRECTORY_SEPARATOR . $diretorio_controller . DIRECTORY_SEPARATOR . $className . $extension)) {
         require_once(__DIR__ . DIRECTORY_SEPARATOR . $diretorio_controller . DIRECTORY_SEPARATOR . $className . $extension);
         $nome_class = $className.explode(".php", $extension)[0];
         $load_class = $nome_class;
-        
+
         if(class_exists($load_class)) {
             $obj_class = new $load_class;
         }
     } else {
         $obj_class = "Index";
     }
-    
+
     return $obj_class;
 }
 
